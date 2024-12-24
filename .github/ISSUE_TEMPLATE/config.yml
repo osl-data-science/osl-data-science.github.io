@@ -1,0 +1,15 @@
+# Ref: https://help.github.com/en/github/building-a-strong-community/configuring-issue-templates-for-your-repository#configuring-the-template-chooser
+blank_issues_enabled: true
+contact_links:
+  - name: 🙋  Usage Questions
+    url: https://github.com/osl-data-science/osl-data-science.github.io/discussions
+    about: |
+      Use OSL Data Science's GitHub Discussions to ask "How do I do X with OSL Data Science?".
+  - name: 📖  Tutorial
+    url: https://github.com/osl-data-science/osl-data-science.github.io
+    about: |
+      The OSL Data Science tutorial is continually updated and provides an in depth walkthrough
+      of how to use the latest release of OSL Data Science.
+  - name: 📝  OSL Data Science Code of Conduct
+    url: https://github.com/osl-data-science/osl-data-science.github.io/coc/CODE_OF_CONDUCT.md
+    about: Expectations for how people will interact with each other on OSL Data Science's GitHub.

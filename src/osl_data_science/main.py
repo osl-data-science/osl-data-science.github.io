@@ -5,13 +5,12 @@ from __future__ import annotations
 import importlib
 
 from pathlib import Path
-from typing import TYPE_CHECKING, Callable, Dict, List, cast
+from typing import Callable, Dict, List, cast
+
+import plotly.graph_objects as go
 
 from jinja2 import Environment, FileSystemLoader
 from typing_extensions import TypeAlias
-
-if TYPE_CHECKING:
-    import plotly.graph_objects as go
 
 FnGetFigure: TypeAlias = Callable[[], go.Figure]
 MetaData: TypeAlias = Dict[str, str]

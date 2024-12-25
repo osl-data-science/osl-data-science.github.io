@@ -27,6 +27,7 @@ pandas = ">=2.2"
 Jinja2 = ">=3.1.2"
 mkdocs-include-markdown-plugin = ">=7.1"
 typing-extensions = ">=4.12"
+eval_type_backport = {version = ">=0.2", python = "<3.10"}
 
 [tool.poetry.group.dev.dependencies]
 coverage = ">=7.2.7"
@@ -58,7 +59,7 @@ targets = "src/osl-data-science/"
 skips = ["B102", "B701", "B507", "B601"]
 
 [tool.mypy]
-python_version = "3.9"
+python_version = "3.10"
 check_untyped_defs = true
 strict = true
 ignore_missing_imports = true
@@ -74,6 +75,7 @@ src = ["./"]
 exclude = [
   'docs',
 ]
+fix = true
 
 [tool.ruff.lint]
 select = [
@@ -81,10 +83,10 @@ select = [
   "F",   # pyflakes
   "D",   # pydocstyle
   "YTT", # flake8-2020
+  "PL",  # PL
   "RUF", # Ruff-specific rules
-  "I001",  # isort
+  "I001", # isort
 ]
-fixable = ["I001"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"

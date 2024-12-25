@@ -5,7 +5,7 @@ from __future__ import annotations
 import importlib
 
 from pathlib import Path
-from typing import TYPE_CHECKING, Callable, Dict, List
+from typing import TYPE_CHECKING, Callable, Dict, List, cast
 
 from jinja2 import Environment, FileSystemLoader
 from typing_extensions import TypeAlias
@@ -13,7 +13,9 @@ from typing_extensions import TypeAlias
 if TYPE_CHECKING:
     import plotly.graph_objects as go
 
-DashboardType: TypeAlias = List[Dict[str, str | Callable[[], go.Figure]]]
+FnGetFigure: TypeAlias = Callable[[], go.Figure]
+MetaData: TypeAlias = Dict[str, str]
+DashboardType: TypeAlias = List[Dict[str, MetaData | FnGetFigure]]
 
 STATIC_DIR = Path(__file__).parent.parent.parent / 'pages'
 STATIC_DASHBOARDS_DIR = STATIC_DIR / 'dashboards'
@@ -67,7 +69,7 @@ def generate_index(dashboards: DashboardType) -> None:
 
 
 def generate_dash(
-    name: str, metadata: dict[str, str], get_figure: Callable[[], go.Figure]
+    name: str, metadata: MetaData, get_figure: FnGetFigure
 ) -> None:
     """Generate the dashboard HTML and Markdown files."""
     dash_dir = STATIC_DASHBOARDS_DIR / metadata['slug']
@@ -100,9 +102,9 @@ def main() -> None:
 
     # Generate each dashboard
     for dashboard in dashboards:
-        metadata = dashboard['metadata']
-        get_figure = dashboard['fn']
-        generate_dash(metadata['title'], metadata, get_figure)
+        metadata = cast(MetaData, dashboard['metadata'])
+        get_figure = cast(FnGetFigure, dashboard['fn'])
+        generate_dash(str(metadata['title']), metadata, get_figure)
 
 
 if __name__ == '__main__':

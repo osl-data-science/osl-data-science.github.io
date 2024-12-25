@@ -5,17 +5,24 @@ repos:
     rev: v4.1.0
     hooks:
       - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: check-builtin-literals
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: detect-private-key
+        exclude: "build|theme"
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: "v3.0.2"
+    hooks:
+      - id: prettier
+        exclude: "build|theme|pages/dashboards"
 
   - repo: local
     hooks:
-      # NOTE: This is a total unnecessary check, just used as part of the
-      #       template. Remove this after creating the template.
-      - id: check-python
-        name: check-python
-        entry: python --version
-        language: system
-        pass_filenames: no
-
       - id: ruff-linter
         name: ruff-linter
         entry: ruff check --fix

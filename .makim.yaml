@@ -20,20 +20,30 @@ groups:
           find . -name '*.pyo' -exec rm -f {} +
           find . -name '*~' -exec rm -f {} +
 
-  docs:
+  pages:
     tasks:
+      pre-build:
+        help: pre-build step
+        backend: bash
+        run: |
+          mkdir -p build
+          python src/osl_data_science/main.py
+
       build:
         help: Build documentation
+        hooks:
+          pre-run:
+            - task: pages.pre-build
         run: |
-          mkdocs build --config-file mkdocs.yaml
+          mkdocs build --verbose --clean
 
       preview:
         help: Preview documentation page locally
         hooks:
           pre-run:
-            - task: docs.build
+            - task: pages.build
         run: |
-          mkdocs serve --watch docs --config-file mkdocs.yaml
+          mkdocs serve --watch pages --watch theme
 
   tests:
     tasks:

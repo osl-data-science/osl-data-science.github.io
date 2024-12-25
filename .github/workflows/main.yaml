@@ -10,13 +10,13 @@ jobs:
   check-branch:
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 10
     concurrency:
       group: check-pr-${{ github.ref }}
       cancel-in-progress: true
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -26,31 +26,20 @@ jobs:
           remote_branch: origin/main
           pr_sha: ${{ github.event.pull_request.head.sha }}
 
-  test:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     concurrency:
       group: ci-${{ github.event_name }}-${{ github.ref }}
       cancel-in-progress: true
-
     defaults:
       run:
         shell: bash -l {0}
-
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Cache Conda Packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.conda/envs/osl-data-science
-          key: ubuntu-latest-conda-${{ hashFiles('conda/dev.yaml') }}
-          restore-keys: |
-            ubuntu-latest-conda-
+      - uses: actions/checkout@v3
 
       - uses: conda-incubator/setup-miniconda@v3
         with:
-          miniforge-version: latest
+          miniconda-version: "latest"
           environment-file: conda/dev.yaml
           channels: conda-forge,nodefaults
           activate-environment: osl-data-science
@@ -59,14 +48,23 @@ jobs:
 
       - name: Install dependencies
         run: |
+          poetry check
           poetry install
 
-      - name: Run tests
-        run: |
-          makim tests.unit
-
-      - name: Run style checks
-        if: success() || failure()
+      - name: Linter
         run: |
           pre-commit install
-          makim tests.linter
+          pre-commit run --all-file
+
+      - name: Build the book
+        run: |
+          makim pages.build
+          echo "ds.opensciencelabs.org" > build/CNAME
+
+      # Push the book's HTML to github-pages
+      - name: GitHub Pages action
+        uses: peaceiris/actions-gh-pages@v3.5.9
+        if: ${{ github.event_name == 'push' }}
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build

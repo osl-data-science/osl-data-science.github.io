@@ -23,8 +23,8 @@ extra_javascript:
 
 nav:
   - Home: "index.md"
-  - Dashboards:
-      - index: "index.md"
+  - Dashboards: "dashboards/index.md"
+  - Mentors: "mentors/index.md"
   - Donate: "donate/index.md"
 
 markdown_extensions:

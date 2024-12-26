@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block header_extra %}
+<style>
+.main-nav>li>a {
+  color: #000000 !important;
+}
+</style>
+{% endblock header_extra%}
+
+{% block content %}
+<section>
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+      {% block content_inner %}
+        {{ page.content }}
+      {% endblock content_inner %}
+    </div>
+  </div>
+</section>
+{% endblock content %}

@@ -62,7 +62,7 @@ def generate_index(dashboards: DashboardType) -> None:
 
     rendered_content = template.render(dashboards=dashboards_data)
 
-    output_file = STATIC_DIR / 'index.md'
+    output_file = STATIC_DIR / 'dashboards' / 'index.md'
     output_file.parent.mkdir(parents=True, exist_ok=True)
     output_file.write_text(rendered_content, encoding='utf-8')
 

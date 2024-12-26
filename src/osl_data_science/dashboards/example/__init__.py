@@ -4,18 +4,19 @@ Example fo how to create a dashboard.
 Please, create also a **get_dash** function for your own implementation.
 """
 
+from __future__ import annotations
+
+from pathlib import Path
+
 import plotly.graph_objects as go
+import yaml
 
 from plotly.subplots import make_subplots
 
 __all__ = ['get_dash', 'metadata']
 
-metadata = {
-    'title': 'OSL Dashboard Example',
-    'slug': 'example',
-    # this folder is located at /theme folder
-    'image': '/images/dashboards/example/header.jpg',
-}
+with open(Path(__file__).parent / 'metadata.yaml') as f:
+    metadata = yaml.safe_load(f)
 
 
 def get_dash() -> go.Figure:

@@ -51,6 +51,7 @@ mkdocs-gen-files = ">=0.5.0"
 makim = "1.19.0"
 # 'PosixPath' object has no attribute 'endswith'
 virtualenv = "<=20.25.1"
+types-pyyaml = ">=6"
 
 
 [tool.bandit]

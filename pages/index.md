@@ -80,7 +80,7 @@ template: home.html
         <h2 class="text-center mb-4">Project Gallery</h2>
         <p>Explore the innovative projects created by our interns. This gallery showcases the diversity and creativity of their work, highlighting the practical application of data science in solving complex problems.</p>
         <div class="text-center mt-4">
-            <a href="/dashboards/" class="btn btn-warning" style="color:#333333!important">Visit the Gallery</a>
+            <a href="/projects/" class="btn btn-warning" style="color:#333333!important">Visit the Gallery</a>
         </div>
     </div>
 </section>

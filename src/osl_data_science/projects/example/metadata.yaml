@@ -1,0 +1,10 @@
+title: "OSL Dashboard Example"
+slug: "example"
+# this folder is located at /theme folder
+image: "/images/projects/example/header.jpg"
+source_code_url: "https://github.com/osl-data-science/osl-data-science.github.io/tree/main/src/osl_data_science/projects/example"
+description: |
+  Example of dashboard to be used as reference
+authors:
+  - Ivan Ogasawara
+release_date: "2024-12-27"

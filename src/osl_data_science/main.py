@@ -17,9 +17,9 @@ MetaData: TypeAlias = Dict[str, str]
 DashboardType: TypeAlias = List[Dict[str, MetaData | FnGetFigure]]
 
 STATIC_DIR = Path(__file__).parent.parent.parent / 'pages'
-STATIC_DASHBOARDS_DIR = STATIC_DIR / 'dashboards'
+STATIC_DASHBOARDS_DIR = STATIC_DIR / 'projects'
 TEMPLATES_DIR = Path(__file__).parent / 'templates'
-DASHBOARDS_DIR = Path(__file__).parent / 'dashboards'
+DASHBOARDS_DIR = Path(__file__).parent / 'projects'
 
 
 def get_dashboards(
@@ -34,7 +34,7 @@ def get_dashboards(
             continue
 
         # Import the module dynamically
-        module_name = f'osl_data_science.dashboards.{subdir.name}'
+        module_name = f'osl_data_science.projects.{subdir.name}'
         module = importlib.import_module(module_name)
 
         # Check if the module has `metadata` and `get_dash`
@@ -62,7 +62,7 @@ def generate_index(dashboards: DashboardType) -> None:
 
     rendered_content = template.render(dashboards=dashboards_data)
 
-    output_file = STATIC_DIR / 'dashboards' / 'index.md'
+    output_file = STATIC_DIR / 'projects' / 'index.md'
     output_file.parent.mkdir(parents=True, exist_ok=True)
     output_file.write_text(rendered_content, encoding='utf-8')
 
@@ -76,20 +76,21 @@ def generate_dash(
     dash_md = dash_dir / 'index.md'
 
     # Template for the Markdown file linking to the HTML
-    dash_index_md_tpl = (
-        '{% include "dashboards/{{ dashboard_name }}/index.html" %}\n'
-    )
+    env = Environment(loader=FileSystemLoader(TEMPLATES_DIR))
+    dash_index_md_tpl = env.get_template('dashboard.md.tpl')
 
     dash_dir.mkdir(parents=True, exist_ok=True)
 
     # Generate the HTML file
-    get_figure().write_html(dash_html)
+    get_figure().write_html(
+        dash_html,
+        include_plotlyjs=False,
+        full_html=False,
+    )
 
     # Generate the Markdown file
     with open(dash_md, 'w') as f:
-        f.write(
-            dash_index_md_tpl.replace('{{ dashboard_name }}', metadata['slug'])
-        )
+        f.write(dash_index_md_tpl.render(metadata))
 
 
 def main() -> None:

@@ -30,12 +30,17 @@ def get_dashboards(
 
     # Iterate over all subdirectories in the dashboards directory
     for subdir in dashboard_dir.iterdir():
-        if not subdir.is_dir() or not (subdir / '__init__.py').exists():
+        if (
+            not subdir.is_dir()
+            or not (subdir / '__init__.py').exists()
+            or subdir.name == 'example'
+        ):
             continue
 
         # Import the module dynamically
-        module_name = f'osl_data_science.projects.{subdir.name}'
-        module = importlib.import_module(module_name)
+        package_name = subdir.name.replace('-', '_')
+        package_qualname = f'osl_data_science.projects.{package_name}'
+        module = importlib.import_module(package_qualname)
 
         # Check if the module has `metadata` and `get_dash`
         if hasattr(module, 'metadata') and hasattr(module, 'get_dash'):
@@ -47,7 +52,8 @@ def get_dashboards(
             )
         else:
             print(
-                f'Warning: {module_name} is missing `metadata` or `get_dash`.'
+                'Warning: Not found `metadata` or `get_dash` '
+                'inside package {package_qualname}.'
             )
 
     return dashboards

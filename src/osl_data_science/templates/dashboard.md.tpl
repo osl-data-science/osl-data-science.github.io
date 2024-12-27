@@ -17,6 +17,16 @@ template: dashboards.html
     <p class="p-1 m-0"><strong>Release Date:</strong> {{ release_date }}</p>
     <p class="p-1 m-0"><strong>Authors:</strong> {{ ", ".join(authors) }}</p>
     <p class="p-1 m-0"><strong>Description:</strong> {{ description }}</p>
+    {% if references %}
+    <p class="p-1 m-0">
+      <strong>References:</strong>
+    </p>
+    <ul>
+    {% for ref in references %}
+      <li>{{ ref }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
   </div>
 </section>
 

@@ -90,6 +90,44 @@ def get_dash_html() -> str:
         template='plotly_white',
     )
 
+    # Sales by Platform per Year
+    year_threshold = 2010
+    filtered_sales = sales[sales['Year'] >= year_threshold]
+    platform_mapping = sales[
+        ['Platform', 'Platform_Mapping']
+    ].drop_duplicates()
+    platform_mapping = dict(
+        zip(platform_mapping['Platform'], platform_mapping['Platform_Mapping'])
+    )
+
+    platform_year_sales = (
+        filtered_sales.groupby(['Year', 'Platform'])['Global_Sales']
+        .sum()
+        .unstack(fill_value=0)
+    )
+
+    # Map platform IDs back to names and keep only used platforms
+    platform_year_sales.columns = platform_year_sales.columns.map(
+        platform_mapping
+    )
+
+    platform_fig = go.Figure()
+    for platform in platform_year_sales.columns:
+        platform_fig.add_trace(
+            go.Bar(
+                x=platform_year_sales.index,
+                y=platform_year_sales[platform],
+                name=platform,
+            )
+        )
+    platform_fig.update_layout(
+        title=f'Sales by Platform Per Year (From {year_threshold})',
+        xaxis_title='Year',
+        yaxis_title='Sales (in millions)',
+        barmode='stack',  # Stack bars for better comparison
+        template='plotly_white',
+    )
+
     # Combine HTML for all figures with custom layout
     html_content = (
         '## Regional Sales Distribution\n\n'
@@ -99,7 +137,9 @@ def get_dash_html() -> str:
         '## Market Share by Genre\n\n'
         f'{genre_fig.to_html(full_html=False, include_plotlyjs=False)}\n\n'
         '## Top Games by Global Sales\n\n'
-        f'{games_fig.to_html(full_html=False, include_plotlyjs=False)}\n'
+        f'{games_fig.to_html(full_html=False, include_plotlyjs=False)}\n\n'
+        f'## Sales by Platform Per Year (From {year_threshold})\n\n'
+        f'{platform_fig.to_html(full_html=False, include_plotlyjs=False)}\n'
     )
     return html_content.strip()
 

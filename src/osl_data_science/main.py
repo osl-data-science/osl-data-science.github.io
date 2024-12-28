@@ -31,8 +31,9 @@ def get_dashboards(
     # Iterate over all subdirectories in the dashboards directory
     for subdir in dashboard_dir.iterdir():
         if (
-            not subdir.is_dir() or not (subdir / '__init__.py').exists()
-            # or subdir.name == 'example'
+            not subdir.is_dir()
+            or not (subdir / '__init__.py').exists()
+            or subdir.name == 'example'
         ):
             continue
 

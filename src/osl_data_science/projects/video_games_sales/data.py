@@ -27,7 +27,7 @@ def get_raw_data() -> pd.DataFrame:
 
 
 def prepare_data(sales: pd.DataFrame) -> pd.DataFrame:
-    """Prepare the data for the analysis and for the ML training."""
+    """Prepare the raw data."""
     sales = sales.copy()
 
     # Drop missing values in critical columns
@@ -37,13 +37,18 @@ def prepare_data(sales: pd.DataFrame) -> pd.DataFrame:
     sales['Year'] = sales['Year'].astype(int)
 
     # Encode categorical variables and retain mapping
+    platform_category = sales['Platform'].astype('category')
+    sales['Platform'] = platform_category.cat.codes
+    sales['Platform_Mapping'] = platform_category.cat.categories[
+        sales['Platform']
+    ].values
+
     genre_category = sales['Genre'].astype('category')
     sales['Genre'] = genre_category.cat.codes
     sales['Genre_Mapping'] = genre_category.cat.categories[
         sales['Genre']
-    ].values  # Map encoded genres back to names
+    ].values
 
-    sales['Platform'] = sales['Platform'].astype('category').cat.codes
     sales['Publisher'] = sales['Publisher'].astype('category').cat.codes
 
     return sales

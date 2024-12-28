@@ -19,6 +19,7 @@ template: dashboards.html
     <p class="p-1 m-0"><strong>Authors:</strong> Ivan Ogasawara</p>
     <p class="p-1 m-0"><strong>Description:</strong> Example of dashboard to be used as reference
 </p>
+
   </div>
 </section>
 

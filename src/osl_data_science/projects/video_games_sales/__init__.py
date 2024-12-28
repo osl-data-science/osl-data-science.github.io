@@ -10,9 +10,9 @@ from pathlib import Path
 
 import yaml
 
-from .dash import get_dash
+from .dash import generate_dash
 
-__all__ = ['get_dash', 'metadata']
+__all__ = ['generate_dash', 'metadata']
 
 PROJECT_DIR = Path(__file__).parent
 

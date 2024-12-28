@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import numpy as np
 import plotly.graph_objects as go
 
@@ -80,3 +82,13 @@ def get_dash() -> go.Figure:
     )
 
     return fig
+
+
+def generate_dash(output_path: Path) -> None:
+    """Save the dashboard HTML to a file."""
+    fig = get_dash()
+    fig.write_html(
+        output_path,
+        include_plotlyjs=False,
+        full_html=False,
+    )

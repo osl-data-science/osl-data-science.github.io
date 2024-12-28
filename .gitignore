@@ -151,4 +151,4 @@ cython_debug/
 
 
 # data
-data/*
+src/osl_data_science/projects/**/data/

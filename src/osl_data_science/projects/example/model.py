@@ -7,4 +7,5 @@ import pandas as pd
 
 def train(df: pd.DataFrame) -> dict[str, float | pd.Series]:
     """Train a ML model with given dataframe."""
+    print(df)
     return {}

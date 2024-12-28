@@ -12,9 +12,9 @@ import plotly.graph_objects as go
 from jinja2 import Environment, FileSystemLoader
 from typing_extensions import TypeAlias
 
-FnGetFigure: TypeAlias = Callable[[], go.Figure]
+FnGenerateDash: TypeAlias = Callable[[Path], go.Figure]
 MetaData: TypeAlias = Dict[str, str]
-DashboardType: TypeAlias = List[Dict[str, MetaData | FnGetFigure]]
+DashboardType: TypeAlias = List[Dict[str, MetaData | FnGenerateDash]]
 
 STATIC_DIR = Path(__file__).parent.parent.parent / 'pages'
 STATIC_DASHBOARDS_DIR = STATIC_DIR / 'projects'
@@ -30,24 +30,30 @@ def get_dashboards(
 
     # Iterate over all subdirectories in the dashboards directory
     for subdir in dashboard_dir.iterdir():
-        if not subdir.is_dir() or not (subdir / '__init__.py').exists():
+        if (
+            not subdir.is_dir()
+            or not (subdir / '__init__.py').exists()
+            or subdir.name == 'example'
+        ):
             continue
 
         # Import the module dynamically
-        module_name = f'osl_data_science.projects.{subdir.name}'
-        module = importlib.import_module(module_name)
+        package_name = subdir.name.replace('-', '_')
+        package_qualname = f'osl_data_science.projects.{package_name}'
+        module = importlib.import_module(package_qualname)
 
         # Check if the module has `metadata` and `get_dash`
-        if hasattr(module, 'metadata') and hasattr(module, 'get_dash'):
+        if hasattr(module, 'metadata') and hasattr(module, 'generate_dash'):
             dashboards.append(
                 {
                     'metadata': module.metadata,
-                    'fn': module.get_dash,
+                    'fn': module.generate_dash,
                 }
             )
         else:
             print(
-                f'Warning: {module_name} is missing `metadata` or `get_dash`.'
+                'Warning: Not found `metadata` or `get_dash` '
+                'inside package {package_qualname}.'
             )
 
     return dashboards
@@ -68,7 +74,7 @@ def generate_index(dashboards: DashboardType) -> None:
 
 
 def generate_dash(
-    name: str, metadata: MetaData, get_figure: FnGetFigure
+    name: str, metadata: MetaData, fn_generate_dash: FnGenerateDash
 ) -> None:
     """Generate the dashboard HTML and Markdown files."""
     dash_dir = STATIC_DASHBOARDS_DIR / metadata['slug']
@@ -82,11 +88,7 @@ def generate_dash(
     dash_dir.mkdir(parents=True, exist_ok=True)
 
     # Generate the HTML file
-    get_figure().write_html(
-        dash_html,
-        include_plotlyjs=False,
-        full_html=False,
-    )
+    fn_generate_dash(dash_html)
 
     # Generate the Markdown file
     with open(dash_md, 'w') as f:
@@ -103,7 +105,7 @@ def main() -> None:
     # Generate each dashboard
     for dashboard in dashboards:
         metadata = cast(MetaData, dashboard['metadata'])
-        get_figure = cast(FnGetFigure, dashboard['fn'])
+        get_figure = cast(FnGenerateDash, dashboard['fn'])
         generate_dash(str(metadata['title']), metadata, get_figure)
 
 

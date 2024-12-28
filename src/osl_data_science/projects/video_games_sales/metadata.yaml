@@ -1,0 +1,12 @@
+title: "Video Game Sales Analysis"
+slug: "video-game-sales-analysis"
+image: "/images/projects/video-game-sales-analysis/header.jpg"
+source_code_url: "https://github.com/osl-data-science/osl-data-science.github.io/tree/main/src/osl_data_science/projects/example"
+description: |
+  Sales analysis of video games on multiple platforms and sold in different parts of the world.
+authors:
+  - Ivan Ogasawara
+release_date: "2024-12-27"
+references:
+  - Based on a <a href="https://www.datacamp.com/datalab/datasets/dataset-python-video-games-sales">datacamp tutorial</a>.
+  - Data source from <a href="https://www.kaggle.com/gregorut/videogamesales">gregorut</a>.

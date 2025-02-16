@@ -40,9 +40,9 @@ template: home.html
 </section>
 
 <!-- Intern Section -->
-<section id="interns" class="bg-light p-5">
+<section id="interns" class="bg-light p-5 text-black-50">
     <div class="container">
-        <h2 class="text-center mb-4">Internship Opportunities</h2>
+        <h2 class="text-center mb-4 text-black">Internship Opportunities</h2>
         <p class="py-2 m-0">
           OSL Data Science Interns engage in hands-on projects that apply
           data science techniques to solve real-world problems.
@@ -86,9 +86,9 @@ template: home.html
 </section>
 
 <!-- Contact -->
-<section id="contact" class="bg-light p-5">
+<section id="contact" class="bg-light p-5 text-black-50">
     <div class="container">
-        <h2 class="text-center mb-4">Contact Us</h2>
+        <h2 class="text-center mb-4 text-black">Contact Us</h2>
         <p>
           We encourage you to reach out if you're interested in participating
           in the OSL Data Science Internship program!
@@ -118,7 +118,7 @@ template: home.html
       for social good to collaborate with us. Together, we can foster
       a more open, transparent, and inclusive data science ecosystem.
     </p>
-    <div class="card-columns partners">
+    <div class="card-columns partners text-black-50">
       <div class="card m-0 p-0">
         <div class="card-body m-0 text-center">
           <a href="https://thegraphnetwork.org/">
@@ -130,7 +130,7 @@ template: home.html
         </div>
         <div class="card-footer m-0">
           <a href="https://thegraphnetwork.org/">
-            <h5 class="card-title"><strong>The GRAPH Network</strong></h5>
+            <h5 class="card-title text-black"><strong>The GRAPH Network</strong></h5>
           </a>
         </div>
       </div>
@@ -144,7 +144,7 @@ template: home.html
         </div>
         <div class="card-footer m-0">
           <a href="https://datateller.org">
-            <h5 class="card-title"><strong>DataTeller</strong></h5>
+            <h5 class="card-title text-black"><strong>DataTeller</strong></h5>
           </a>
         </div>
       </div>

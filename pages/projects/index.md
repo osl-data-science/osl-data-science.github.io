@@ -10,7 +10,7 @@ science.
 
 <div class="container mt-4">
     <div class="row">
-
+        
         <div class="col-md-12 col-lg-6 col-xl-4">
             <div class="card mb-4 p-0">
                 <img src="/images/projects/video-game-sales-analysis/header.jpg" class="card-img-top my-0" alt="Video Game Sales Analysis">
@@ -22,6 +22,6 @@ science.
                 </div>
             </div>
         </div>
-
+        
     </div>
 </div>

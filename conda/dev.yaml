@@ -1,9 +1,9 @@
-name: osl-data-science
+name: osl-ds-web
 channels:
   - nodefaults
   - conda-forge
 dependencies:
-  - python >=3.9,<=3.12
+  - python 3.12
   - pip
   - poetry
   - nodejs # used by semantic-release

@@ -27,6 +27,24 @@ groups:
         backend: bash
         run: |
           mkdir -p build
+          pushd pages/projects
+
+          for dir in */; do
+            # Check if it's a directory
+            [ -d "$dir" ] || continue
+
+            echo "Entering directory: $dir"
+            pushd "$dir" > /dev/null  # Change to directory and suppress output
+
+            quarto render index.qmd
+
+            popd > /dev/null  # Return to the original directory
+            echo "Returning to parent directory"
+            echo "---------------------------------"
+          done
+
+          popd
+
           python src/osl_data_science/main.py
 
       build:

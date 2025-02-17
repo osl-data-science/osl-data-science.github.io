@@ -1,0 +1,99 @@
+---
+title: "OSL Dashboard Example"
+slug: "example"
+# this folder is located at /theme folder
+image: "/images/projects/example/header.jpg"
+source_code_url: "https://github.com/osl-data-science/osl-data-science.github.io/tree/main/src/osl_data_science/projects/example"
+description: |
+  Example of dashboard to be used as reference
+authors:
+  - Ivan Ogasawara
+release_date: "2024-12-27"
+format: dashboard
+execute:
+  echo: false
+---
+
+## Example Dashboard
+
+```{python}
+import seaborn as sns
+import pandas as pd
+from plotnine import ggplot, aes, geom_point, geom_boxplot, theme_minimal, labs
+
+# Load example dataset from seaborn
+df = sns.load_dataset("penguins")
+
+# Define theme
+theme = theme_minimal(18)
+
+def plot_flipper_length_vs_body_mass(df):
+    return (
+        ggplot(df, aes(x="flipper_length_mm", y="body_mass_g", color="species")) +
+        geom_point() +
+        theme +
+        labs(x="Flipper Length (mm)", y="Body Mass (g)", title="Flipper Length vs Body Mass by Species")
+    )
+
+def plot_species_distribution(df):
+    return (
+        ggplot(df, aes(x="species", y="body_mass_g", fill="species")) +
+        geom_boxplot() +
+        theme +
+        labs(x="Species", y="Body Mass (g)", title="Body Mass Distribution by Species")
+    )
+
+def table_summary(df):
+    return df.groupby("species")["body_mass_g"].describe().reset_index()
+```
+
+```{python}
+#| tags: [parameters]
+# Default species filter
+species_filter = "Adelie"
+```
+
+# Penguins Dataset Visualization
+
+## Row
+
+```{python}
+#| content: valuebox
+#| title: "Total Penguins"
+dict(icon="feather", color="light", value=len(df))
+```
+
+```{python}
+#| content: valuebox
+#| title: "Unique Species"
+dict(icon="palette", color="light", value=df["species"].nunique())
+```
+
+## Row {height="60%"}
+
+```{python}
+#| title: Flipper Length vs Body Mass
+plot_flipper_length_vs_body_mass(df)
+```
+
+```{python}
+#| title: Body Mass Distribution by Species
+plot_species_distribution(df)
+```
+
+## Row
+
+```{python}
+#| title: Species Summary Table
+from IPython.display import Markdown
+table = table_summary(df)
+Markdown(table.to_markdown(index=False))
+```
+
+# Data
+
+```{python}
+#| title: Sample Data Preview
+from itables import show
+show(df.head(10))
+```

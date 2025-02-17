@@ -54,6 +54,7 @@ jobs:
           poetry install
 
       - name: Linter
+        if: ${{ github.event_name != 'push' }}
         run: |
           pre-commit install
           pre-commit run --all-file

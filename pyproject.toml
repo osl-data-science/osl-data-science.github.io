@@ -44,6 +44,9 @@ dependencies = [
   "seaborn (>=0.13.2,<0.14.0)",
 ]
 
+[tool.poetry]
+package-mode = false
+
 [tool.poetry.group.dev.dependencies]
 coverage = ">=7.2.7"
 pre-commit = ">=3.3.2"

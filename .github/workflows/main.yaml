@@ -53,7 +53,11 @@ jobs:
           poetry check
           poetry install
 
+      - name: Build pages
+        run: makim pages.build
+
       - name: Linter
+        if: ${{ github.event_name != 'push' }}
         run: |
           pre-commit install
           pre-commit run --all-file

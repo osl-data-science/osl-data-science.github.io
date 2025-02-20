@@ -5,7 +5,9 @@ repos:
     rev: v4.1.0
     hooks:
       - id: end-of-file-fixer
+        exclude: "build|pages/projects/"
       - id: trailing-whitespace
+        exclude: "build|pages/projects/"
       - id: check-json
       - id: check-toml
       - id: check-xml
@@ -23,12 +25,14 @@ repos:
 
   - repo: local
     hooks:
-      - id: mkdocs-build
-        name: mkdocs-build
-        entry: makim pages.build
-        files: pages
-        language: system
-        pass_filenames: false
+      # note: quarto rendering creates new names/ids every time
+      #       so we cannot keep it as a pre-commit hook
+      # - id: mkdocs-build
+      #   name: mkdocs-build
+      #   entry: makim pages.build
+      #   files: pages
+      #   language: system
+      #   pass_filenames: false
 
       - id: linkcheckmd
         name: linkcheckmd

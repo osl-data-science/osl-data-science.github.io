@@ -5,7 +5,10 @@ slug: "example"
 image: "/images/projects/example/header.jpg"
 source_code_url: "https://github.com/osl-data-science/osl-data-science.github.io/tree/main/src/osl_data_science/projects/example"
 description: |
-  Example of dashboard to be used as reference
+  A simple dashboard showcasing the Palmer Penguins dataset.
+  This dashboard provides visual insights into different species
+  of penguins, their physical characteristics, and distribution.
+  It serves as a reference for building dashboards using Quarto.
 authors:
   - Ivan Ogasawara
 release_date: "2024-12-27"

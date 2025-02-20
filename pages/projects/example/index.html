@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Example of dashboard to be used as reference">
+<meta name="description" content="A simple dashboard showcasing the Palmer Penguins dataset. This dashboard provides visual insights into different species of penguins, their physical characteristics, and distribution. It serves as a reference for building dashboards using Quarto.">
 
 <title>OSL Dashboard Example</title>
 <style>
@@ -18,7 +18,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */
   vertical-align: middle;
 }
 </style>
@@ -56,21 +56,21 @@ ul.task-list li input[type="checkbox"] {
   <div class="navbar-container container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>    
+    </button>
 
 
-    <div class="navbar-brand-container">       
+    <div class="navbar-brand-container">
 
       <div class="navbar-title">
         <div class="navbar-title-text"><a href="#">OSL Dashboard Example</a></div>
-        
-        
+
+
       </div>
     </div>
 <div id="dashboard-collapse" class="navbar-collapse collapse"><ul class="navbar-nav navbar-nav-scroll me-auto" role="tablist"><li class="nav-item" role="presentation"><a id="tab-penguins-dataset-visualization" class="nav-link active" data-bs-toggle="tab" role="tab" data-bs-target="#penguins-dataset-visualization" data-scrolling="false" href="#penguins-dataset-visualization" aria-controls="penguins-dataset-visualization" aria-selected="true"><span class="nav-link-text">Penguins Dataset Visualization</span></a></li><li class="nav-item" role="presentation"><a id="tab-data" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#data" data-scrolling="false" href="#data" aria-controls="data" aria-selected="false"><span class="nav-link-text">Data</span></a></li></ul></div></div>
 </nav>
 </header>
-<div class="page-layout-custom quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill quarto-dashboard-pages">  
+<div class="page-layout-custom quarto-dashboard-content bslib-gap-spacing html-fill-container bslib-page-fill quarto-dashboard-pages">
 
 <div class="bslib-grid-item html-fill-item tab-content bslib-grid" data-layout="fill" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
 <div id="penguins-dataset-visualization" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-penguins-dataset-visualization">
@@ -150,7 +150,7 @@ grid-auto-rows: minmax(0, 1fr);">
 Species Summary Table
 </span></div></div>
 <div class="card-body html-fill-item html-fill-container">
-<div class="cell-output cell-output-display cell-output-markdown html-fill-item html-fill-container" data-execution_count="15">
+<div class="cell-output cell-output-display cell-output-markdown html-fill-item html-fill-container" data-execution_count="55">
 <table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 14%">
@@ -231,10 +231,10 @@ Sample Data Preview
 </span></div></div>
 <div class="card-body html-fill-item html-fill-container">
 <div class="cell-output cell-output-display html-fill-item html-fill-container">
-<table id="itables_0d5c1beb_15df_447a_9571_3efac604a899" class="display nowrap compact" data-quarto-disable-processing="true" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom">
+<table id="itables_b4b8e36a_22eb_40bc_90c8_1d7937db58b1" class="display nowrap compact" data-quarto-disable-processing="true" style="table-layout:auto;width:auto;margin:auto;caption-side:bottom">
 <thead>
     <tr style="text-align: right;">
-      
+
       <th>species</th>
       <th>island</th>
       <th>bill_length_mm</th>
@@ -310,7 +310,7 @@ Loading ITables v2.2.4 from the internet...
 <script type="module">
     import {DataTable, jQuery as $} from 'https://www.unpkg.com/dt_for_itables@2.0.13/dt_bundle.js';
 
-    document.querySelectorAll("#itables_0d5c1beb_15df_447a_9571_3efac604a899:not(.dataTable)").forEach(table => {
+    document.querySelectorAll("#itables_b4b8e36a_22eb_40bc_90c8_1d7937db58b1:not(.dataTable)").forEach(table => {
         if (!(table instanceof HTMLTableElement))
             return;
 
@@ -321,7 +321,7 @@ Loading ITables v2.2.4 from the internet...
         let dt_args = {"autoWidth": false, "buttons": [], "dom": "fiBrtlp", "info": true, "keys": true, "language": {"info": "Showing _TOTAL_ entries"}, "lengthChange": false, "order": [], "ordering": true, "paging": false, "responsive": true, "searching": true, "warn_on_selected_rows_not_rendered": true};
         dt_args["data"] = data;
 
-        
+
         new DataTable(table, dt_args);
     });
 </script>
@@ -360,7 +360,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       toggleBodyColorMode(bsSheetEl);
     }
   }
-  toggleBodyColorPrimary();  
+  toggleBodyColorPrimary();
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -370,7 +370,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
+      if (clz.startsWith('code-annotation-')) {
         return true;
       }
     }
@@ -390,11 +390,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
       button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
+      tooltip = new bootstrap.Tooltip(button,
+        { trigger: "manual",
           customClass: "code-copy-button-tooltip",
           offset: [0, -8]});
-      tooltip.show();    
+      tooltip.show();
     }
     setTimeout(function() {
       if (tooltip) {
@@ -470,7 +470,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     if (onUntriggerFn) {
       config.onUntrigger = onUntriggerFn;
     }
-    window.tippy(el, config); 
+    window.tippy(el, config);
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
   for (var i=0; i<noterefs.length; i++) {
@@ -545,7 +545,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     tippyHover(xref, undefined, function(instance) {
       instance.disable();
       let url = xref.getAttribute('href');
-      let hash = undefined; 
+      let hash = undefined;
       if (url.startsWith('#')) {
         hash = url;
       } else {
@@ -573,7 +573,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             if (note !== null) {
               const html = processXRef(id, note);
               instance.setContent(html);
-            } 
+            }
           }).finally(() => {
             instance.enable();
             instance.show();
@@ -597,7 +597,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             const html = processXRef(null, note);
             instance.setContent(html);
-          } 
+          }
         }).finally(() => {
           instance.enable();
           instance.show();
@@ -637,7 +637,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             height = bottom - top;
           }
           if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
+            // cook up a div (if necessary) and position it
             let div = window.document.getElementById("code-annotation-line-highlight");
             if (div === null) {
               div = window.document.createElement("div");
@@ -765,9 +765,9 @@ window.document.addEventListener("DOMContentLoaded", function (_event) {
   if (window.bslib.Card) {
     window.bslib.Card.initializeAllCards();
   }
-}); 
+});
 </script>
-  
+
 
 
 

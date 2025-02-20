@@ -45,7 +45,7 @@ groups:
 
           popd
 
-          python src/osl_data_science/main.py
+          python scripts/quarto_rendering/main.py
 
       build:
         help: Build documentation
@@ -57,11 +57,19 @@ groups:
 
       preview:
         help: Preview documentation page locally
+        args:
+          port:
+            help: Page port
+            type: string
+            default: "8000"
         hooks:
           pre-run:
             - task: pages.build
         run: |
-          mkdocs serve --watch pages --watch theme
+          # mkdocs serve --watch pages --watch theme
+          pushd build
+          python -m http.server ${{ args.port }}
+          popd
 
   tests:
     tasks:

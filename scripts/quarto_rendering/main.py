@@ -57,8 +57,10 @@ science.
             <div class="card mb-4 p-0">
                 <img src="{{ dash.image.strip() }}"
                     class="card-img-top my-0" alt="{{ dash.title.strip() }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ dash.title.strip() }}</h5>
+                <div class="card-body text-dark">
+                    <h5 class="card-title text-dark">
+                        {{ dash.title.strip() }}
+                    </h5>
                     <p class="card-text">{{ dash.description.strip() }}</p>
                     <a href="/projects/{{ dash.slug }}/"
                         target="_blank"
